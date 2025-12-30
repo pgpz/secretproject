@@ -29,7 +29,7 @@ int main (void)
     InitWindow(screenWidth, screenHeight, "shitty platformer");
 
     Player player = { 0 };
-    player.position = (Vector2){ 400, 280};
+    player.position = (Vector2){ 400, 280 };
     player.speed = 0;
     player.canJump = false;
     EnvItem envItems[] = {
@@ -67,6 +67,19 @@ int main (void)
       camera.zoom += ((float)GetMouseWheelMove()*0.05f);
       if (camera.zoom > 3.0f) camera.zoom = 3.0f;
       else if (camera.zoom < 0.25f) camera.zoom = 0.25f;
+
+      if (IsKeyPressed(KEY_R)) {
+        camera.zoom = 1.0f;
+        player.position = (Vector2){ 400, 280 };
+      }
+
+      if (IsKeyPressed(KEY_C)) cameraOption = (cameraOption + 1)%cameraUpdatersLength;
+
+      cameraUpdaters[cameraOption](&camera, &player, envItems, envItemsLength, deltaTime, screenWidth, screenHeight);
+      BeginDrawing();
+          ClearBackground(MAGENTA);
+          BeginMode2D(camera);
+
 
     }
 
