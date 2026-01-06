@@ -59,7 +59,7 @@ int main(void)
     camera.position = (Vector3){ 0.0f, 2.0f, 4.0f };
     camera.target = (Vector3){ 0.0f, 2.0f, 0.0f };
     camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
-    camera.fovy = 90.0f;
+    camera.fovy = 75.0f;
     camera.projection = CAMERA_PERSPECTIVE;
 
     int cameraMode = CAMERA_FIRST_PERSON;
@@ -72,12 +72,12 @@ int main(void)
     {
         heights[i] = (float)GetRandomValue(1, 12);
         positions[i] = (Vector3){ (float)GetRandomValue(-15, 15), heights[i]/2.0f, (float)GetRandomValue(-15, 15) };
-        colors[i] = (Color){ GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255 };
+        colors[i] = (Color){ GetRandomValue(20, 255), GetRandomValue(10, 55), 20, 255 };
     }
 
     DisableCursor();
 
-    SetTargetFPS(120);
+    SetTargetFPS(240);
 
     while (!WindowShouldClose())
     {
