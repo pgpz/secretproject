@@ -80,6 +80,10 @@ int main(void)
       if (volume > 1.0f) volume = 1.0f;
       SetMusicVolume(music, volume);
     }
+
+    timePlayed = GetMusicTimePlayed(music)/GetMusicTimeLength(music);
+
+    if (timePlayed > 1.0f) timePlayed = 1.0f;
   }
 
     pixelShader = LoadShader(
@@ -213,7 +217,9 @@ int main(void)
         EndDrawing();
     }
 
-    CloseWindow(); 
+    UnloadMusicStream(music);
+    CloseAudioDevice();
+    CloseWindow();
 
     return 0;
 }
