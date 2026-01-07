@@ -63,6 +63,24 @@ int main(void)
     SetMusicPan(music, pan);
     float volume = 0.3f;
     SetMusicVolume(music, volume);
+    
+    while (!WindowShouldClose())
+  {
+    UpdateMusicStream(music);
+
+    if (IsKeyPressed(KEY_DOWN))
+    {
+      volume -= 0.05f;
+      if (volume < 0.0f) volume = 0.0f;
+      SetMusicVolume(music, volume);
+    }
+    else if (IsKeyPressed(KEY_UP))
+    {
+      volume += 0.05f;
+      if (volume > 1.0f) volume = 1.0f;
+      SetMusicVolume(music, volume);
+    }
+  }
 
     pixelShader = LoadShader(
     0,
