@@ -64,27 +64,6 @@ int main(void)
     float volume = 0.3f;
     SetMusicVolume(music, volume);
     
-    while (!WindowShouldClose())
-  {
-    UpdateMusicStream(music);
-
-    if (IsKeyPressed(KEY_DOWN))
-    {
-      volume -= 0.05f;
-      if (volume < 0.0f) volume = 0.0f;
-      SetMusicVolume(music, volume);
-    }
-    else if (IsKeyPressed(KEY_UP))
-    {
-      volume += 0.05f;
-      if (volume > 1.0f) volume = 1.0f;
-      SetMusicVolume(music, volume);
-    }
-
-    timePlayed = GetMusicTimePlayed(music)/GetMusicTimeLength(music);
-
-    if (timePlayed > 1.0f) timePlayed = 1.0f;
-  }
 
     pixelShader = LoadShader(
     0,
@@ -117,6 +96,8 @@ int main(void)
 
     while (!WindowShouldClose())
     {
+
+        UpdateMusicStream(music);
         if (IsKeyPressed(KEY_ONE))
         {
             cameraMode = CAMERA_FREE;
@@ -139,6 +120,18 @@ int main(void)
         {
             cameraMode = CAMERA_ORBITAL;
             camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+        }
+        if (IsKeyDown(KEY_DOWN))
+        {
+            volume -= 0.05f;
+            if (volume < 0.0f) volume = 0.0f;
+            SetMusicVolume(music, volume);
+        }
+        else if (IsKeyDown(KEY_UP))
+        {
+            volume += 0.05f;
+            if (volume > 1.0f) volume = 1.0f;
+            SetMusicVolume(music, volume);
         }
 
         if (IsKeyPressed(KEY_P))
@@ -164,6 +157,9 @@ int main(void)
                 camera.fovy = 60.0f;
             }
         }
+
+        timePlayed = GetMusicTimePlayed(music)/GetMusicTimeLength(music);
+        if (timePlayed > 1.0f) timePlayed = 1.0f;
 
 
         UpdateCamera(&camera, cameraMode);
