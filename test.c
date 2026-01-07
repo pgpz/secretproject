@@ -50,6 +50,20 @@ int main(void)
     target = LoadRenderTexture(screenWidth, screenHeight);
     SetTextureFilter(target.texture, TEXTURE_FILTER_POINT);
 
+
+    InitAudioDevice();
+
+    Music music = LoadMusicStream("resources/leekspin.mp3");
+
+    PlayMusicStream(music);
+
+    float timePlayed = 0.0f;
+    bool pause = false;
+    float pan = 0.0f;
+    SetMusicPan(music, pan);
+    float volume = 0.3f;
+    SetMusicVolume(music, volume);
+
     pixelShader = LoadShader(
     0,
     TextFormat("resources/shaders/glsl%i/pixelizer.fs", GLSL_VERSION)
